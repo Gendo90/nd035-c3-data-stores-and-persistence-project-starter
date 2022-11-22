@@ -1,11 +1,9 @@
 package com.udacity.jdnd.course3.critter.model;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-@Entity
 @MappedSuperclass
 public class Person {
 	@Id
@@ -16,7 +14,7 @@ public class Person {
 	
 	private String address;
 	
-	private int phoneNumber;
+	private String phoneNumber;
 	
 	private String email;
 	
@@ -35,7 +33,7 @@ public class Person {
 		return this.address;
 	}
 	
-	public int getPhoneNumber() {
+	public String getPhoneNumber() {
 		return this.phoneNumber;
 	}
 	
@@ -56,7 +54,7 @@ public class Person {
 		this.address = address;
 	}
 	
-	public void setPhoneNumber(int phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 	

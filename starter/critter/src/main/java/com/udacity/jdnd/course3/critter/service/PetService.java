@@ -33,6 +33,17 @@ public class PetService {
 		return pet;
 	}
 	
+	public Pet getPet(long id) {
+		Pet pet = null;
+		Optional<Pet> optional = petRepository.findById(id);
+		
+		if(optional.isPresent()) {
+			pet = optional.get();
+		}
+		
+		return pet;
+	}
+	
 	public List<Pet> getPetsByOwner(long ownerId) {
 		List<Pet> retrievedPets = null;
 		

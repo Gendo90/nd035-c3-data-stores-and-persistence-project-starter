@@ -43,7 +43,16 @@ public class PetController {
 
     @GetMapping("/{petId}")
     public PetDTO getPet(@PathVariable long petId) {
-        throw new UnsupportedOperationException();
+        Pet resultPet = petService.getPet(petId);
+        
+        PetDTO resultPetDto = new PetDTO();
+    	BeanUtils.copyProperties(resultPet, resultPetDto);
+    	
+    	// need to set the owner id here because it is not copied over
+		// by BeanUtils (different field names!)
+    	resultPetDto.setOwnerId(resultPet.getOwner().getId());
+    	
+    	return resultPetDto;
     }
 
     @GetMapping

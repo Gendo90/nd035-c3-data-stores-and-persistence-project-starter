@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.udacity.jdnd.course3.critter.model.Customer;
+import com.udacity.jdnd.course3.critter.model.Employee;
 import com.udacity.jdnd.course3.critter.service.CustomerService;
+import com.udacity.jdnd.course3.critter.service.EmployeeService;
 
 import java.time.DayOfWeek;
 import java.util.ArrayList;
@@ -24,6 +26,9 @@ public class UserController {
 	
 	@Autowired
 	CustomerService customerService;
+	
+	@Autowired
+	EmployeeService employeeService;
 
     @PostMapping("/customer")
     public CustomerDTO saveCustomer(@RequestBody CustomerDTO customerDTO){
@@ -58,12 +63,24 @@ public class UserController {
 
     @PostMapping("/employee")
     public EmployeeDTO saveEmployee(@RequestBody EmployeeDTO employeeDTO) {
-        throw new UnsupportedOperationException();
+    	Employee newEmployee = new Employee();
+    	BeanUtils.copyProperties(employeeDTO, newEmployee);
+
+    	Employee resultEmployee = employeeService.saveEmployee(newEmployee);
+    	EmployeeDTO resultEmployeeDto = new EmployeeDTO();
+    	BeanUtils.copyProperties(resultEmployee, resultEmployeeDto);
+    	
+    	return resultEmployeeDto;
     }
 
     @PostMapping("/employee/{employeeId}")
     public EmployeeDTO getEmployee(@PathVariable long employeeId) {
-        throw new UnsupportedOperationException();
+        Employee retrievedEmployee = employeeService.getEmployee(employeeId);
+        
+        EmployeeDTO resultEmployeeDto = new EmployeeDTO();
+    	BeanUtils.copyProperties(retrievedEmployee, resultEmployeeDto);
+    	
+    	return resultEmployeeDto;
     }
 
     @PutMapping("/employee/{employeeId}")

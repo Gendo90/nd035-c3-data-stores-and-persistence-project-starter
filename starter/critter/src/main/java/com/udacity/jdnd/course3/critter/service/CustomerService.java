@@ -1,6 +1,7 @@
 package com.udacity.jdnd.course3.critter.service;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,18 @@ public class CustomerService {
 		Customer customer = customerRepository.save(newCustomer);
 		
 		return customer;
+	}
+	
+	public Customer getCustomer(long id) {
+		Customer result = null;
+		
+		Optional<Customer> optional = customerRepository.findById(id);
+		
+		if(optional.isPresent()) {
+			result = optional.get();
+		}
+		
+		return result;
 	}
 	
 	public Set<Customer> getAllCustomers() {

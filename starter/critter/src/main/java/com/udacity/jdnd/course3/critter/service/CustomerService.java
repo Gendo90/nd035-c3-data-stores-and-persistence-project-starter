@@ -33,6 +33,18 @@ public class CustomerService {
 		return result;
 	}
 	
+	public Customer getOwnerByPet(long id) {
+		Customer result = null;
+		
+		Optional<Customer> optional = customerRepository.findByPetsId(id);
+		
+		if(optional.isPresent()) {
+			result = optional.get();
+		}
+		
+		return result;
+	}
+	
 	public Set<Customer> getAllCustomers() {
 		Iterable<Customer> allCustomersFromDB = customerRepository.findAll();
 		Set<Customer> allCustomers = new HashSet<>();

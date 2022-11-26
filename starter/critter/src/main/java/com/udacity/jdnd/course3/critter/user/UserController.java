@@ -36,8 +36,7 @@ public class UserController {
     	BeanUtils.copyProperties(customerDTO, newCustomer);
 
     	Customer resultCustomer = customerService.saveCustomer(newCustomer);
-    	CustomerDTO resultCustomerDto = new CustomerDTO();
-    	BeanUtils.copyProperties(resultCustomer, resultCustomerDto);
+    	CustomerDTO resultCustomerDto = new CustomerDTO(resultCustomer);
     	
     	return resultCustomerDto;
     }
@@ -48,8 +47,7 @@ public class UserController {
     	List<CustomerDTO> allCustomerDtos = new ArrayList<>(); 
 
     	for (Customer customer : allCustomers) {
-    		CustomerDTO customerDto = new CustomerDTO();
-    		BeanUtils.copyProperties(customer, customerDto);
+    		CustomerDTO customerDto = new CustomerDTO(customer);
     		allCustomerDtos.add(customerDto);
     	}
     	
@@ -58,7 +56,11 @@ public class UserController {
 
     @GetMapping("/customer/pet/{petId}")
     public CustomerDTO getOwnerByPet(@PathVariable long petId){
-        throw new UnsupportedOperationException();
+        Customer petsOwner = customerService.getOwnerByPet(petId);
+        
+    	CustomerDTO resultCustomerDto = new CustomerDTO(petsOwner);
+    	
+    	return resultCustomerDto;
     }
 
     @PostMapping("/employee")

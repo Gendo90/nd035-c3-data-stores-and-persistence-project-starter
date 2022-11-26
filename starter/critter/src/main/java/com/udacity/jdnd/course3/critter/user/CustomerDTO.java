@@ -1,6 +1,12 @@
 package com.udacity.jdnd.course3.critter.user;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.beans.BeanUtils;
+
+import com.udacity.jdnd.course3.critter.model.Customer;
+import com.udacity.jdnd.course3.critter.model.Pet;
 
 /**
  * Represents the form that customer request and response data takes. Does not map
@@ -12,6 +18,18 @@ public class CustomerDTO {
     private String phoneNumber;
     private String notes;
     private List<Long> petIds;
+    
+    public CustomerDTO() { }
+    
+    public CustomerDTO(Customer customer) {
+    	BeanUtils.copyProperties(customer, this);
+    	List<Long> petIds = new ArrayList<>();
+    	
+    	for (Pet pet : customer.getPets()) {
+    		petIds.add(pet.getId());
+    	}
+    	this.petIds = petIds;
+    }
 
     public long getId() {
         return id;

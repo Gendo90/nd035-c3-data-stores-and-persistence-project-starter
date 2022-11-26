@@ -1,5 +1,6 @@
 package com.udacity.jdnd.course3.critter.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -15,7 +16,7 @@ public class Customer extends Person {
 	
 	//Customer-specific fields
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "owner", orphanRemoval=true)
-	private Set<Pet> pets;
+	private Set<Pet> pets = new HashSet<>();
 	
 	//Getters
 	public Set<Pet> getPets() {

@@ -1,11 +1,14 @@
 package com.udacity.jdnd.course3.critter.model;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import com.udacity.jdnd.course3.critter.pet.PetType;
@@ -26,9 +29,13 @@ public class Pet {
     
 	public Pet() { }
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "owner_id")
 	private Customer owner;
+	
+	@ManyToMany
+	@JoinColumn(name = "schedule_id")
+    private Set<Schedule> schedules;
 	
 	//Getters
 	public Long getId() {
@@ -55,6 +62,10 @@ public class Pet {
 		return this.owner;
 	}
 	
+	public Set<Schedule> getSchedules() {
+        return schedules;
+    }
+	
 	//Setters
 	public void setId(Long id) {
 		this.id = id;
@@ -79,4 +90,8 @@ public class Pet {
 	public void setOwner(Customer owner) {
 		this.owner = owner;
 	}
+	
+	public void setSchedules(Set<Schedule> schedules) {
+        this.schedules = schedules;
+    }
 }

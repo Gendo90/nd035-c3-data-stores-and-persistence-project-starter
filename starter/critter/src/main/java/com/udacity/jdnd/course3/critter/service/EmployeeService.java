@@ -1,5 +1,6 @@
 package com.udacity.jdnd.course3.critter.service;
 
+import java.time.DayOfWeek;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -31,6 +32,14 @@ public class EmployeeService {
 			 employee = optional.get();
 		 }
 		 
+		
+		return employee;
+	}
+	
+	public Employee setAvailability(long id, Set<DayOfWeek> available) {
+		Employee employee = this.getEmployee(id);
+		employee.setDaysAvailable(available);
+		employee = employeeRepository.save(employee);
 		
 		return employee;
 	}

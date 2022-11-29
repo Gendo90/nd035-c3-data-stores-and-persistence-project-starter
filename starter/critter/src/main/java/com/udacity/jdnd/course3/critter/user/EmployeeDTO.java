@@ -3,6 +3,10 @@ package com.udacity.jdnd.course3.critter.user;
 import java.time.DayOfWeek;
 import java.util.Set;
 
+import org.springframework.beans.BeanUtils;
+
+import com.udacity.jdnd.course3.critter.model.Employee;
+
 /**
  * Represents the form that employee request and response data takes. Does not map
  * to the database directly.
@@ -12,6 +16,12 @@ public class EmployeeDTO {
     private String name;
     private Set<EmployeeSkill> skills;
     private Set<DayOfWeek> daysAvailable;
+    
+    public EmployeeDTO() { }
+    
+    public EmployeeDTO(Employee employee) {
+    	BeanUtils.copyProperties(employee, this);
+    }
 
     public long getId() {
         return id;

@@ -69,8 +69,7 @@ public class UserController {
     	BeanUtils.copyProperties(employeeDTO, newEmployee);
 
     	Employee resultEmployee = employeeService.saveEmployee(newEmployee);
-    	EmployeeDTO resultEmployeeDto = new EmployeeDTO();
-    	BeanUtils.copyProperties(resultEmployee, resultEmployeeDto);
+    	EmployeeDTO resultEmployeeDto = new EmployeeDTO(resultEmployee);
     	
     	return resultEmployeeDto;
     }
@@ -87,7 +86,7 @@ public class UserController {
 
     @PutMapping("/employee/{employeeId}")
     public void setAvailability(@RequestBody Set<DayOfWeek> daysAvailable, @PathVariable long employeeId) {
-        throw new UnsupportedOperationException();
+        employeeService.setAvailability(employeeId, daysAvailable);
     }
 
     @GetMapping("/employee/availability")

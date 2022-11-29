@@ -91,7 +91,21 @@ public class UserController {
 
     @GetMapping("/employee/availability")
     public List<EmployeeDTO> findEmployeesForService(@RequestBody EmployeeRequestDTO employeeDTO) {
-        throw new UnsupportedOperationException();
+        List<Employee> matchingEmployees = employeeService.getBySkillsAndAvailability(employeeDTO.getSkills(), employeeDTO.getDate().getDayOfWeek());
+        List<EmployeeDTO> matchingEmployeesDtos = new ArrayList<>();
+        
+        System.out.println(employeeDTO.getDate().getDayOfWeek());
+        System.out.println(matchingEmployees.size());
+        
+        for (Employee e : matchingEmployees) {
+        	System.out.println(e.getId());
+        	EmployeeDTO resultEmployeeDto = new EmployeeDTO();
+        	BeanUtils.copyProperties(e, resultEmployeeDto);
+        	
+        	matchingEmployeesDtos.add(resultEmployeeDto);
+        }
+        
+        return matchingEmployeesDtos;
     }
 
 }

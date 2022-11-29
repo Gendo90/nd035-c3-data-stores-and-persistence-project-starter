@@ -1,7 +1,9 @@
 package com.udacity.jdnd.course3.critter.service;
 
 import java.time.DayOfWeek;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -11,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.udacity.jdnd.course3.critter.model.Employee;
 import com.udacity.jdnd.course3.critter.repository.EmployeeRepository;
+import com.udacity.jdnd.course3.critter.user.EmployeeSkill;
 
 @Transactional
 @Service
@@ -42,5 +45,17 @@ public class EmployeeService {
 		employee = employeeRepository.save(employee);
 		
 		return employee;
+	}
+	
+	public List<Employee> getBySkillsAndAvailability(Set<EmployeeSkill> skills, DayOfWeek available) {
+		List<Employee> matchingEmployees = new ArrayList<>();
+		Optional<List<Employee>> optional = employeeRepository.findAllBySkillsAndAvailability(skills, skills.size(), 
+				available);
+		
+		if(optional.isPresent()) {
+			matchingEmployees = optional.get();
+		}
+		
+		return matchingEmployees;
 	}
 }

@@ -2,12 +2,12 @@ package com.udacity.jdnd.course3.critter.model;
 
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
@@ -16,7 +16,7 @@ import com.udacity.jdnd.course3.critter.user.EmployeeSkill;
 @Entity
 public class Schedule {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@ManyToMany(mappedBy = "schedules")

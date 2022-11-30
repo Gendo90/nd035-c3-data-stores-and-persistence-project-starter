@@ -7,17 +7,20 @@ import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.Type;
 
 import com.udacity.jdnd.course3.critter.pet.PetType;
 
 @Entity
 public class Pet {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
     private PetType type;
@@ -26,6 +29,7 @@ public class Pet {
     
     private LocalDate birthDate;
     
+    @Type(type = "text")
     private String notes;
     
 	public Pet() { }

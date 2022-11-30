@@ -1,13 +1,16 @@
 package com.udacity.jdnd.course3.critter.model;
 
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+
+import org.hibernate.annotations.Type;
 
 @MappedSuperclass
 public class Person {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	private String name;
@@ -17,6 +20,9 @@ public class Person {
 	private String phoneNumber;
 	
 	private String email;
+	
+	@Type(type = "text")
+	private String notes;
 	
 	protected Person() { }
 	

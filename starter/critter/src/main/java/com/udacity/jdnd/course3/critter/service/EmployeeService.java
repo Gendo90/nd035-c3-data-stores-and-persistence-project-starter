@@ -60,11 +60,11 @@ public class EmployeeService {
 	
 	public List<Employee> getBySkillsAndAvailability(Set<EmployeeSkill> skills, DayOfWeek available) {
 		List<Employee> matchingEmployees = new ArrayList<>();
-		Optional<List<Employee>> optional = employeeRepository.findAllBySkillsAndAvailability(skills, skills.size(), 
+		Optional<Set<Employee>> optional = employeeRepository.findAllBySkillsAndAvailability(skills, skills.size(), 
 				available);
 		
 		if(optional.isPresent()) {
-			matchingEmployees = optional.get();
+			matchingEmployees = new ArrayList<>(optional.get());
 		}
 		
 		return matchingEmployees;

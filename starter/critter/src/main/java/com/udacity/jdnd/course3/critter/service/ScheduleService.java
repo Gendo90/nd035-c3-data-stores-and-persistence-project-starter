@@ -39,6 +39,13 @@ public class ScheduleService {
 		
 		Schedule schedule = scheduleRepository.save(newSchedule);
 		
+		// need to resave the employees, pets with the new schedule
+		scheduledEmployees.forEach(a -> a.addSchedule(schedule));
+		employeeService.saveAllUpdatedEmployees(scheduledEmployees);
+		
+		scheduledPets.forEach(a -> a.addSchedule(schedule));
+		petService.saveAllUpdatedPets(scheduledPets);
+		
 		return schedule;
 	}
 	
@@ -51,6 +58,39 @@ public class ScheduleService {
 		}
 		
 		return allSchedules;
+	}
+
+	public Set<Schedule> getSchedulesByPetId(long petId) {
+		List<Schedule> retrievedSchedules = scheduleRepository.findAllByPetsId(petId);
+		Set<Schedule> results = new HashSet<>();
+		
+		for (Schedule s : retrievedSchedules) {
+			results.add(s);
+		}
+		
+		return results;
+	}
+
+	public Set<Schedule> getSchedulesByEmployeeId(long employeeId) {
+		List<Schedule> retrievedSchedules = scheduleRepository.findAllByEmployeesId(employeeId);
+		Set<Schedule> results = new HashSet<>();
+		
+		for (Schedule s : retrievedSchedules) {
+			results.add(s);
+		}
+		
+		return results;
+	}
+
+	public Set<Schedule> getSchedulesByCustomerId(long customerId) {
+		List<Schedule> retrievedSchedules = scheduleRepository.findAllByPetsOwnerId(customerId);
+		Set<Schedule> results = new HashSet<>();
+		
+		for (Schedule s : retrievedSchedules) {
+			results.add(s);
+		}
+		
+		return results;
 	}
 
 }

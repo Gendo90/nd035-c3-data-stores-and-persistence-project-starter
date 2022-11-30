@@ -69,4 +69,8 @@ public class PetService {
 		
 		return retrievedPets;
 	}
+
+	public void saveAllUpdatedPets(Iterable<Pet> scheduledPets) {
+		petRepository.saveAll(scheduledPets);
+	}
 }

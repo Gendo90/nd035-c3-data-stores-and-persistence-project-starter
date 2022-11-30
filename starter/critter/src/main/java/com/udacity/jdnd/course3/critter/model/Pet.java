@@ -1,6 +1,7 @@
 package com.udacity.jdnd.course3.critter.model;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -35,7 +36,7 @@ public class Pet {
 	
 	@ManyToMany
 	@JoinColumn(name = "schedule_id")
-    private Set<Schedule> schedules;
+    private Set<Schedule> schedules = new HashSet<>();
 	
 	//Getters
 	public Long getId() {
@@ -94,4 +95,8 @@ public class Pet {
 	public void setSchedules(Set<Schedule> schedules) {
         this.schedules = schedules;
     }
+
+	public void addSchedule(Schedule schedule) {
+		this.schedules.add(schedule);
+	}
 }

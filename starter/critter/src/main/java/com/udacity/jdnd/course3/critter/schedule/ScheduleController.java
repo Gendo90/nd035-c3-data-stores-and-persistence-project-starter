@@ -47,16 +47,40 @@ public class ScheduleController {
 
     @GetMapping("/pet/{petId}")
     public List<ScheduleDTO> getScheduleForPet(@PathVariable long petId) {
-        throw new UnsupportedOperationException();
+        Set<Schedule> resultSchedules = scheduleService.getSchedulesByPetId(petId);
+        
+        List<ScheduleDTO> resultScheduleDtos = new ArrayList<>();
+        for (Schedule s : resultSchedules) {
+        	ScheduleDTO resultScheduleDto = new ScheduleDTO(s);
+        	resultScheduleDtos.add(resultScheduleDto);
+        }
+        
+        return resultScheduleDtos;
     }
 
     @GetMapping("/employee/{employeeId}")
     public List<ScheduleDTO> getScheduleForEmployee(@PathVariable long employeeId) {
-        throw new UnsupportedOperationException();
+    	Set<Schedule> resultSchedules = scheduleService.getSchedulesByEmployeeId(employeeId);
+        
+        List<ScheduleDTO> resultScheduleDtos = new ArrayList<>();
+        for (Schedule s : resultSchedules) {
+        	ScheduleDTO resultScheduleDto = new ScheduleDTO(s);
+        	resultScheduleDtos.add(resultScheduleDto);
+        }
+        
+        return resultScheduleDtos;
     }
 
     @GetMapping("/customer/{customerId}")
     public List<ScheduleDTO> getScheduleForCustomer(@PathVariable long customerId) {
-        throw new UnsupportedOperationException();
+    	Set<Schedule> resultSchedules = scheduleService.getSchedulesByCustomerId(customerId);
+        
+        List<ScheduleDTO> resultScheduleDtos = new ArrayList<>();
+        for (Schedule s : resultSchedules) {
+        	ScheduleDTO resultScheduleDto = new ScheduleDTO(s);
+        	resultScheduleDtos.add(resultScheduleDto);
+        }
+        
+        return resultScheduleDtos;
     }
 }

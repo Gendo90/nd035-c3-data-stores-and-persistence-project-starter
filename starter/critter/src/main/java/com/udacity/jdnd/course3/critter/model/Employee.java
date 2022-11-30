@@ -22,7 +22,7 @@ public class Employee extends Person {
 	//Employee-specific fields
 	@ManyToMany
 	@JoinColumn(name = "schedule_id")
-    private Set<Schedule> schedules;
+    private Set<Schedule> schedules = new HashSet<>();
 	
 	@ElementCollection(targetClass = EmployeeSkill.class, fetch = FetchType.EAGER)
 	private Set<EmployeeSkill> skills = new HashSet<>();
@@ -52,4 +52,8 @@ public class Employee extends Person {
     public void setSchedules(Set<Schedule> schedules) {
         this.schedules = schedules;
     }
+
+	public void addSchedule(Schedule schedule) {
+		this.schedules.add(schedule);
+	}
 }

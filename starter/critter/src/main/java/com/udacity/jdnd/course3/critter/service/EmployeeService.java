@@ -69,4 +69,8 @@ public class EmployeeService {
 		
 		return matchingEmployees;
 	}
+
+	public void saveAllUpdatedEmployees(Iterable<Employee> updatedEmployees) {
+		employeeRepository.saveAll(updatedEmployees);
+	}
 }

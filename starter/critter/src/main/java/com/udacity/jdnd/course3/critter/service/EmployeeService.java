@@ -39,6 +39,17 @@ public class EmployeeService {
 		return employee;
 	}
 	
+	public Set<Employee> getAllByIds(List<Long> employeeIds) {
+		Set<Employee> employees = new HashSet<>();
+		Iterable<Employee> results = employeeRepository.findAllById(employeeIds);
+		
+		for (Employee e : results) {
+			employees.add(e);
+		}
+		
+		return employees;
+	}
+	
 	public Employee setAvailability(long id, Set<DayOfWeek> available) {
 		Employee employee = this.getEmployee(id);
 		employee.setDaysAvailable(available);

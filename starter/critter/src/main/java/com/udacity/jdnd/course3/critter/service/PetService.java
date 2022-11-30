@@ -1,6 +1,8 @@
 package com.udacity.jdnd.course3.critter.service;
 
 import java.util.Optional;
+import java.util.Set;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.udacity.jdnd.course3.critter.model.Customer;
+import com.udacity.jdnd.course3.critter.model.Employee;
 import com.udacity.jdnd.course3.critter.model.Pet;
 import com.udacity.jdnd.course3.critter.repository.PetRepository;
 
@@ -42,6 +45,17 @@ public class PetService {
 		}
 		
 		return pet;
+	}
+	
+	public Set<Pet> getAllByIds(List<Long> petIds) {
+		Set<Pet> pets = new HashSet<>();
+		Iterable<Pet> results = petRepository.findAllById(petIds);
+		
+		for (Pet p : results) {
+			pets.add(p);
+		}
+		
+		return pets;
 	}
 	
 	public List<Pet> getPetsByOwner(long ownerId) {

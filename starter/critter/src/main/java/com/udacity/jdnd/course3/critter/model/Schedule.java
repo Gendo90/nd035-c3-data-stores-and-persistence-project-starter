@@ -1,6 +1,7 @@
 package com.udacity.jdnd.course3.critter.model;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -8,7 +9,6 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 
 import com.udacity.jdnd.course3.critter.user.EmployeeSkill;
@@ -19,12 +19,11 @@ public class Schedule {
 	@GeneratedValue
 	private Long id;
 	
-	// may need to add initial hashsets for employees and pets
 	@ManyToMany(mappedBy = "schedules")
-	private Set<Employee> employees;
+	private Set<Employee> employees = new HashSet<>();
 	
 	@ManyToMany(mappedBy = "schedules")
-    private Set<Pet> pets;
+    private Set<Pet> pets = new HashSet<>();;
 	
     private LocalDate date;
     
